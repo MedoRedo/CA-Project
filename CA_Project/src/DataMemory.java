@@ -1,13 +1,13 @@
  
 public class DataMemory {
 	boolean MemRead, MemWrite;
-	int[] data;
+	short[] data;
 	int address;
-	int writeData, readData;
+	short writeData, readData;
 	
 	
 	public DataMemory() {
-		data = new int[1024];
+		data = new short[1024];
 		MemWrite = false;
 		MemRead = false;		
 	}
@@ -16,17 +16,17 @@ public class DataMemory {
 		this.address = address;
 	}
 
-	public void setWriteData(int writeData) {
+	public void setWriteData(short writeData) {
 		this.writeData = writeData;
 	}
 
-	public int read(){
+	public short read(){
 		readData = data[address];
 		return readData;
 	}
-	public int setMemRead(int address){
+	public short setMemRead(int address){
 		MemRead = true;
-		int ans = -1;
+		short ans = -1;
 		setAddress(address);
 		ans = read();
 		return ans;
@@ -34,27 +34,32 @@ public class DataMemory {
 	public void write(){
 		data[address]=writeData;
 	}	
-	public void setMemWrite(int address, int intData){
+	public void setMemWrite(int address, short shortData){
 		MemWrite = true;
 		setAddress(address);
-		this.writeData= intData;
+		this.writeData= shortData;
 		write();
 	}
 	
-	// public static void main(String[] args) {
-		// DataMemory ram = new DataMemory();
-		// ram.write(167, 72);
-		// ram.write(1000, 35);
-		// ram.write(1023, 100);
-		// ram.write(6, 10);
-		// ram.write(12, 4);
-		
-		// ram.read(0);		//default value because no data was written in index 0
-		// ram.read(6);
-		// ram.read(12);
-		// ram.read(167);
-		// ram.read(1000);
-		// ram.read(1023);
-		// ram.read(5);		//default value because no data was written in index 5
-	// }
+	 public static void main(String[] args) {
+		 DataMemory ram = new DataMemory();
+		 short data = 72;
+		 ram.setMemWrite(167, data);
+		 data = 35;
+		 ram.setMemWrite(1000, data);
+		 data = 100;
+		 ram.setMemWrite(1023, data);
+		 data = 10;
+		 ram.setMemWrite(6, data);
+		 data = 4;
+		 ram.setMemWrite(12, data);
+		 
+		 System.out.println(ram.setMemRead(0));		//default value because no data was written in index 0
+		 System.out.println(ram.setMemRead(6));
+		 System.out.println(ram.setMemRead(12));
+		 System.out.println(ram.setMemRead(167));
+		 System.out.println(ram.setMemRead(1000));
+		 System.out.println(ram.setMemRead(1023));
+		 System.out.println(ram.setMemRead(5));		//default value because no data was written in index 5
+	 }
 }
