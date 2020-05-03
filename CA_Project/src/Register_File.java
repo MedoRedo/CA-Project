@@ -14,6 +14,9 @@ public class Register_File {
 	public short read_Data_2() {
 		return registers[read_Register_2];		
 	}
+	public short read_Data_3() {
+		return registers[write_Register];
+	}
 	public void setWrite() {
 		if(write)
 			registers[write_Register] = write_Data;
