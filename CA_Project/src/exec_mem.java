@@ -8,14 +8,15 @@ public class exec_mem {
 	boolean MemWrite;
 	boolean MemtoReg;
 	boolean RegWrite;
-	String BranchVal;
-	boolean ZeroLess;
+	short BranchVal;
+	boolean Zflag;
+	boolean LessThanFlag;
 	short AluResult;
-	String WriteData;
-	String WriteReg;
+	short WriteData;
+	short WriteReg;
 
 	public exec_mem(boolean brancheq,boolean branchless, boolean jump, boolean memRead, boolean memWrite, boolean memtoReg, boolean regWrite,
-			String branchVal, boolean zeroLess, short aluResult, String writeData, String writeReg) {
+			short branchVal, boolean zflag , boolean lessThanFlag, short aluResult, short writeData, short writeReg) {
 
 		Brancheq = brancheq;
 		Branchless = branchless;
@@ -25,7 +26,8 @@ public class exec_mem {
 		MemtoReg = memtoReg;
 		RegWrite = regWrite;
 		BranchVal = branchVal;
-		ZeroLess = zeroLess;
+		Zflag = zflag;
+		LessThanFlag = lessThanFlag;
 		AluResult = aluResult;
 		WriteData = writeData;
 		WriteReg = writeReg;

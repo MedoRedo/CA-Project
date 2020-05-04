@@ -1,7 +1,8 @@
 public class ALU {
 	short result = 0;
 	String OpName = null;
-
+    boolean Zflag = false;
+    boolean LessThanflag = false;
 	// Input Type : Decimal
 	public short ALUEvaluator(String Op, short Operand1, short Operand2) {
 		switch (Op) {
@@ -43,6 +44,14 @@ public class ALU {
 		case "1000":
 			
 		}
+		
+		if(result==0){
+			Zflag = true;
+		}
+		if(result<0){
+			LessThanflag = true; 
+		}
+		
 		return result;
 	}
 
