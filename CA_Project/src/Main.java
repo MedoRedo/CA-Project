@@ -4,7 +4,7 @@ public class Main {
 	static decode_exec ID_EXE;
 	static exec_mem EXE_M;
 	static mem_wb M_WB;
-	static int PC;
+	static short PC;
 	static Register_File regFile;
 	static DataMemory ram;
 	static Instruction_Memory instMemo;
@@ -16,6 +16,13 @@ public class Main {
 		instMemo = new Instruction_Memory();
 		alu = new ALU();
 
+	}
+	
+	public void run() {
+		
+	}
+	public void nextCycle() {
+		
 	}
 
 }

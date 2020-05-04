@@ -2,7 +2,8 @@
 public class decode_exec {
 
 	boolean RegDst;
-	boolean Branch;
+	boolean Branchless;
+	boolean Brancheq;
 	boolean Jump;
 	boolean MemRead;
 	boolean MemWrite;
@@ -11,18 +12,19 @@ public class decode_exec {
 	String AluOp;
 	boolean AluSrc;
 	short Pc;
-	String ReadData1;
-	String ReadData2;
-	String ReadData3;
+	short ReadData1;
+	short ReadData2;
+	short ReadData3;
 	String Immediate;
-	String rd;
-	String rt;
+	short writereg;
+	String jumpDest;
 
-	public decode_exec(boolean regDst, boolean branch, boolean jump, boolean memRead, boolean memWrite,
-			boolean memtoReg, String aluOp, boolean aluSrc, boolean regWrite, short pc, String readData1,
-			String readData2, String readData3, String immediate, String rd, String rt) {
+	public decode_exec(boolean regDst, boolean brancheq,boolean branchless, boolean jump, boolean memRead, boolean memWrite,
+			boolean memtoReg, String aluOp, boolean aluSrc, boolean regWrite, short pc, short readData1,
+			short readData2, short readData3, String immediate, short writereg, String j) {
 		RegDst = regDst;
-		Branch = branch;
+		Brancheq = brancheq;
+		Branchless = branchless;
 		Jump = jump;
 		MemRead = memRead;
 		MemWrite = memWrite;
@@ -35,7 +37,7 @@ public class decode_exec {
 		ReadData2 = readData2;
 		ReadData3 = readData3;
 		Immediate = immediate;
-		this.rd = rd;
-		this.rt = rt;
+		this.writereg = writereg;
+		jumpDest = j;
 	}
 }

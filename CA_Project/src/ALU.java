@@ -40,7 +40,8 @@ public class ALU {
 			result = SrlOp(Operand1, Operand2);
 			OpName = "Shift Right Logic";
 			break;
-
+		case "1000":
+			
 		}
 		return result;
 	}

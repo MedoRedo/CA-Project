@@ -1,7 +1,8 @@
 
 public class exec_mem {
 
-	boolean Branch;
+	boolean Brancheq;
+	boolean Branchless;
 	boolean Jump;
 	boolean MemRead;
 	boolean MemWrite;
@@ -13,10 +14,11 @@ public class exec_mem {
 	String WriteData;
 	String WriteReg;
 
-	public exec_mem(boolean branch, boolean jump, boolean memRead, boolean memWrite, boolean memtoReg, boolean regWrite,
+	public exec_mem(boolean brancheq,boolean branchless, boolean jump, boolean memRead, boolean memWrite, boolean memtoReg, boolean regWrite,
 			String branchVal, boolean zeroLess, short aluResult, String writeData, String writeReg) {
 
-		Branch = branch;
+		Brancheq = brancheq;
+		Branchless = branchless;
 		Jump = jump;
 		MemRead = memRead;
 		MemWrite = memWrite;
