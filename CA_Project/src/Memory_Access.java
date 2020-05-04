@@ -13,16 +13,16 @@ public class Memory_Access {
 	 * Execute method as an input. writes the result in the memory address and sets
 	 * the corresponding flag for memory accessing
 	 */
-	public int MemoAccess(short ALUresult, short ReadData2, char MemWrite, char MemRead, char Brancheq, char Branchless,
+	public int MemoAccess(short ALUresult, short ReadData2, char MemWrite, char MemRead, char BranchEq, char BranchLess,
 			char Zero_Flag, char lessThan_Flag, int SignExtend, short branchAddress) {
 		if (MemWrite == '1') {
 			ram.setMemWrite(ALUresult, ReadData2);
 		}
 		
-		if (Brancheq == '1' && Zero_Flag == '1') {
+		if (BranchEq == '1' && Zero_Flag == '1') {
 			Main.PC = branchAddress;
 		}
-		if (Branchless == '1' && lessThan_Flag == '1') {
+		if (BranchLess == '1' && lessThan_Flag == '1') {
 			Main.PC = branchAddress;
 		}
 		
