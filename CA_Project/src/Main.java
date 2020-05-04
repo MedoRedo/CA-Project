@@ -9,6 +9,7 @@ public class Main {
 	static DataMemory ram;
 	static Instruction_Memory instMemo;
 	static ALU alu;
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		regFile = new Register_File();
@@ -17,12 +18,21 @@ public class Main {
 		alu = new ALU();
 
 	}
-	
+
 	public void run() {
-		
+		for (int i = 0; i < instMemo.instructions.length + 4; i++) {
+			nextCycle();
+		}
 	}
+
 	public void nextCycle() {
-		
+		// write back phase;
+		// memory phase
+		// excute phase
+		Instruction_Decode ins_dec = new Instruction_Decode(regFile);
+		ins_dec.InstDecode();
+		Instruction_Fetch ins_fetch = new Instruction_Fetch(instMemo);
+		ins_fetch.InstFetch();
 	}
 
 }
