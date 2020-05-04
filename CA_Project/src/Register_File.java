@@ -29,13 +29,4 @@ public class Register_File {
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 	}
-	/*
-	 * Type  opCode    funct
-	 * add     0        32
-	 * sub     0        34
-	 * lw      35			
-	 * sw      43
-	 * j       2 
-	 * BEQ     4
-	 */
 }
