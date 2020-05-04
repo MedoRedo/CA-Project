@@ -1,4 +1,3 @@
- 
 public class DataMemory {
 	boolean MemRead, MemWrite;
 	short[] data;
