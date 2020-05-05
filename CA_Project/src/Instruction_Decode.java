@@ -1,7 +1,7 @@
 
 public class Instruction_Decode {
 	String ALUop, SignExtendimm, SignExtendjump;
-	boolean RegDst, ALUSrc, RegWrite, MemRead, MemWrite, Brancheq,Branchless, MemtoReg, jump;
+	boolean RegDst, ALUSrc, RegWrite, MemRead, MemWrite, Brancheq, Branchless, MemtoReg, jump;
 	Register_File regFile;
 	short ReadData1, ReadData2, WriteReg;
 
@@ -9,24 +9,26 @@ public class Instruction_Decode {
 		this.regFile = regFile;
 	}
 
-
 	/*
 	 * This method takes in the instruction from InstFetch method as an input,
 	 * decodes and outputs the ALUOp code, the first operand, the second operand.
 	 */
 	public void InstDecode() {
-		String inst = Main.IF_ID.ins;
-		String OpCode = inst.substring(0, 3);
-		ContUnit(OpCode);
-		regFile.write = RegWrite;
-		regFile.decode(inst, RegDst);
-		ReadData1 = regFile.read_Data_1();
-		ReadData2 = regFile.read_Data_2();
-		WriteReg = regFile.write_Register;
-		SignExtendimm = SignExtend(inst.substring(12));
-		SignExtendjump = SignExtend(inst.substring(4));
-		Main.ID_EXE = new decode_exec(RegDst, Brancheq,Branchless, jump, MemRead, MemWrite, MemtoReg, ALUop, ALUSrc, RegWrite,
-				Main.IF_ID.pc, ReadData1, ReadData2, SignExtendimm, WriteReg, SignExtendjump);
+		if (Main.IF_ID != null) {
+			String inst = Main.IF_ID.ins;
+			String OpCode = inst.substring(0, 3);
+			ContUnit(OpCode);
+			regFile.write = RegWrite;
+			regFile.decode(inst, RegDst);
+			ReadData1 = regFile.read_Data_1();
+			ReadData2 = regFile.read_Data_2();
+			WriteReg = regFile.write_Register;
+			SignExtendimm = SignExtend(inst.substring(12));
+			SignExtendjump = SignExtend(inst.substring(4));
+			Main.ID_EXE = new decode_exec(RegDst, Brancheq, Branchless, jump, MemRead, MemWrite, MemtoReg, ALUop,
+					ALUSrc, RegWrite, Main.IF_ID.pc, ReadData1, ReadData2, SignExtendimm, WriteReg, SignExtendjump);
+		} else
+			Main.ID_EXE = null;
 	}
 
 	/*
@@ -38,13 +40,12 @@ public class Instruction_Decode {
 		return String.format("%16s", immediate).replace(" ", immediate.substring(0, 1));
 	}
 
-	
 	/*
 	 * This method takes in the OpCode code from InstDecode method as an input,
 	 * changes the control signals according to the provided table outputs all 8
 	 * control unit signals to the ALU Control.
 	 */
-	
+
 	public void ContUnit(String OpCode) {
 		switch (OpCode) {
 		case "0000":// sub
