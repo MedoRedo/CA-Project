@@ -1,14 +1,11 @@
 
 public class Execute {
 	ALU alu;
-	short AddResult;
+	short branchAddress;
 	boolean Zflag ;
 	boolean LessThanflag;
 	short ALUResult;
 	short ReadData2;
-	short MUX;
-	short M1;
-	short M2;
 	
 	
 	
@@ -33,16 +30,15 @@ public class Execute {
 			Zflag = alu.Zflag;
 			LessThanflag = alu.LessThanflag;
 			Add();
-			Main.EXE_M = new exec_mem(Main.ID_EXE.Brancheq, Main.ID_EXE.Branchless, Main.ID_EXE.Jump, Main.ID_EXE.MemRead, Main.ID_EXE.MemWrite, 
-					Main.ID_EXE.MemtoReg, Main.ID_EXE.RegWrite, AddResult, Zflag,LessThanflag,ALUResult, Main.ID_EXE.ReadData2, Main.ID_EXE.RegWrite)	;
-					}
+			Main.EXE_M = new exec_mem(Main.ID_EXE, ALUResult, branchAddress, LessThanflag, Zflag);
+		}
 		else{
 			Main.EXE_M = null;
 		}
 	}
 
 	public void Add() {
-		AddResult = (short)(Main.ID_EXE.Immediate + Main.ID_EXE.Pc);
+		branchAddress = (short)(Main.ID_EXE.Immediate + Main.ID_EXE.Pc);
 	}
 	
 	
