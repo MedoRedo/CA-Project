@@ -39,7 +39,7 @@ public class Memory_Access {
 			if (MemRead) {
 				readData =  ram.setMemRead(ALUresult);
 			}
-			Main.M_WB = new mem_wb(Main.EXE_M.MemtoReg, Main.EXE_M.RegWrite, Main.EXE_M.AluResult, readData);			
+			Main.M_WB = new mem_wb(Main.EXE_M.MemtoReg, Main.EXE_M.RegWrite, ALUresult, readData);			
 		}else {
 			Main.M_WB = null;
 		}
