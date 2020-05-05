@@ -14,12 +14,14 @@ public class Write_Back {
 	result data from Execute method as an input. writes the result in the destination register
 	and sets the corresponding flag for register writing
  */
-	public void WriteBack(short ALUresult, short ReadData, char MemToReg, char RegDst) {
-		if(MemToReg == '1') {
-			reg_File.write_Data = ReadData;
-		}else {
-			reg_File.write_Data = ALUresult;
+	public void WriteBack() {
+		if(Main.M_WB != null) {
+			if(Main.M_WB.MemtoReg) {
+				reg_File.write_Data = Main.M_WB.ReadData;
+			}else {
+				reg_File.write_Data = Main.M_WB.ALUresult;
+			}
+			reg_File.setWrite(Main.M_WB.RegWrite);		
 		}
-		reg_File.setWrite();
 	}
 }

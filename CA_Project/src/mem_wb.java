@@ -3,15 +3,15 @@ public class mem_wb {
 
 	boolean MemtoReg;
 	boolean RegWrite;
-	short AluResult;
+	short ALUresult;
+	short ReadData;
 
-	public mem_wb(boolean memtoReg, boolean regWrite, short aluResult, String readData) {
+	public mem_wb(boolean memtoReg, boolean regWrite, short aluResult, short readData) {
 
 		MemtoReg = memtoReg;
 		RegWrite = regWrite;
-		AluResult = aluResult;
+		ALUresult = aluResult;
 		ReadData = readData;
 	}
 
-	String ReadData;
 }

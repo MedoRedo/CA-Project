@@ -3,7 +3,7 @@ public class Instruction_Decode {
 	String ALUop, SignExtendimm, SignExtendjump;
 	boolean RegDst, ALUSrc, RegWrite, MemRead, MemWrite, Brancheq,Branchless, MemtoReg, jump;
 	Register_File regFile;
-	short ReadData1, ReadData2, ReadData3, WriteReg;
+	short ReadData1, ReadData2, WriteReg;
 
 	public Instruction_Decode(Register_File regFile) {
 		this.regFile = regFile;
@@ -22,12 +22,11 @@ public class Instruction_Decode {
 		regFile.decode(inst, RegDst);
 		ReadData1 = regFile.read_Data_1();
 		ReadData2 = regFile.read_Data_2();
-		ReadData3 = regFile.read_Data_3();
 		WriteReg = regFile.write_Register;
 		SignExtendimm = SignExtend(inst.substring(12));
 		SignExtendjump = SignExtend(inst.substring(4));
 		Main.ID_EXE = new decode_exec(RegDst, Brancheq,Branchless, jump, MemRead, MemWrite, MemtoReg, ALUop, ALUSrc, RegWrite,
-				Main.IF_ID.pc, ReadData1, ReadData2, ReadData3, SignExtendimm, WriteReg, SignExtendjump);
+				Main.IF_ID.pc, ReadData1, ReadData2, SignExtendimm, WriteReg, SignExtendjump);
 	}
 
 	/*

@@ -18,19 +18,15 @@ public class Register_File {
 		return registers[read_Register_2];
 	}
 
-	public short read_Data_3() {
-		return registers[read_Register_3];
-	}
-
-	public void setWrite() {
-		if (write)
+	public void setWrite(boolean write) {
+		this.write = write;
+		if(this.write)
 			registers[write_Register] = write_Data;
 	}
 
 	public void decode(String instruction, boolean RegDst) {
 		read_Register_1 = Short.parseShort(instruction.substring(4, 8), 2);
 		read_Register_2 = Short.parseShort(instruction.substring(8, 12), 2);
-		read_Register_3 = Short.parseShort(instruction.substring(12, 16), 2);
 		write_Register = !RegDst ? read_Register_2 : Short.parseShort(instruction.substring(12, 16), 2);
 	}
 

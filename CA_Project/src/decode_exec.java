@@ -14,14 +14,13 @@ public class decode_exec {
 	short Pc;
 	short ReadData1;
 	short ReadData2;
-	short ReadData3;
 	short Immediate;
 	short writereg;
 	short jumpDest;
 
 	public decode_exec(boolean regDst, boolean brancheq,boolean branchless, boolean jump, boolean memRead, boolean memWrite,
 			boolean memtoReg, String aluOp, boolean aluSrc, boolean regWrite, short pc, short readData1,
-			short readData2, short readData3, String immediate, short writereg, String j) {
+			short readData2, String immediate, short writereg, String j) {
 		RegDst = regDst;
 		Brancheq = brancheq;
 		Branchless = branchless;
@@ -35,7 +34,6 @@ public class decode_exec {
 		Pc = pc;
 		ReadData1 = readData1;
 		ReadData2 = readData2;
-		ReadData3 = readData3;
 		Immediate = Short.parseShort(immediate, 2);
 		this.writereg = writereg;
 		jumpDest = Short.parseShort(immediate, 2);
