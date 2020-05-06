@@ -1,9 +1,7 @@
 
 public class Memory_Access {
-	DataMemory ram;
 	Cache cache;
-	public Memory_Access(DataMemory ram, Cache cache) {
-		this.ram = ram;
+	public Memory_Access(Cache cache) {
 		this.cache = cache;
 	}
 
@@ -28,7 +26,6 @@ public class Memory_Access {
 			short branchAddress = Main.EXE_M.BranchAddress;
 			if (MemWrite) {
 				cache.write(ALUresult, writeData);
-//				ram.setMemWrite(ALUresult, writeData);
 			}
 			
 			if (BranchEq && Zero_Flag) {
