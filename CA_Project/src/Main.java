@@ -30,7 +30,7 @@ public class Main {
 	public void nextCycle() {
 		Write_Back wb = new Write_Back(regFile);
 		wb.WriteBack();
-		Memory_Access ma = new Memory_Access(ram,cache);
+		Memory_Access ma = new Memory_Access(cache);
 		ma.MemoAccess();
 		Execute ex = new Execute(alu);
 		ex.execute();
