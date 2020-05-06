@@ -9,6 +9,7 @@ public class Main {
 	static DataMemory ram;
 	static Instruction_Memory instMemo;
 	static ALU alu;
+	static Cache cache;
 	static int numofins;
 
 	public static void main(String[] args) {
@@ -17,7 +18,7 @@ public class Main {
 		ram = new DataMemory();
 		instMemo = new Instruction_Memory();
 		alu = new ALU();
-
+		cache = new Cache(ram);
 	}
 
 	public void run() {
@@ -29,7 +30,7 @@ public class Main {
 	public void nextCycle() {
 		Write_Back wb = new Write_Back(regFile);
 		wb.WriteBack();
-		Memory_Access ma = new Memory_Access(ram);
+		Memory_Access ma = new Memory_Access(ram,cache);
 		ma.MemoAccess();
 		Execute ex = new Execute(alu);
 		ex.execute();

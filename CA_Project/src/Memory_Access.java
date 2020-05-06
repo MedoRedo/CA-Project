@@ -1,9 +1,10 @@
 
 public class Memory_Access {
 	DataMemory ram;
-
-	public Memory_Access(DataMemory ram) {
+	Cache cache;
+	public Memory_Access(DataMemory ram, Cache cache) {
 		this.ram = ram;
+		this.cache = cache;
 	}
 
 	/*
@@ -26,7 +27,8 @@ public class Memory_Access {
 			short writeData = Main.EXE_M.WriteData;
 			short branchAddress = Main.EXE_M.BranchAddress;
 			if (MemWrite) {
-				ram.setMemWrite(ALUresult, writeData);
+				cache.write(ALUresult, writeData);
+//				ram.setMemWrite(ALUresult, writeData);
 			}
 			
 			if (BranchEq && Zero_Flag) {
@@ -37,7 +39,7 @@ public class Memory_Access {
 			}
 			short readData = 0;
 			if (MemRead) {
-				readData =  ram.setMemRead(ALUresult);
+				readData =  cache.read(ALUresult);
 			}
 			Main.M_WB = new mem_wb(Main.EXE_M.MemtoReg, Main.EXE_M.RegWrite, ALUresult, readData);			
 		}else {
