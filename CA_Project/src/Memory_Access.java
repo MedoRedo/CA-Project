@@ -35,8 +35,8 @@ public class Memory_Access {
 			if (BranchLess && lessThan_Flag) {
 				Main.PC = branchAddress;
 			}
-			if(Main.EXE_M.Jump) {
-				Main.PC=Main.EXE_M.JumpDest;
+			if (Main.EXE_M.Jump) {
+				Main.PC = Main.EXE_M.JumpDest;
 			}
 			short readData = 0;
 			if (MemRead) {
@@ -56,10 +56,12 @@ public class Memory_Access {
 
 	public void print() {
 		System.out.println("Memory stage");
-		System.out.println("ALU result: " + Main.EXE_M.AluResult);
-		System.out.println("memory word read: " + Main.M_WB.ReadData);
+		System.out.println("ALU result/address: " + (Main.EXE_M.AluResult >= 0
+				? String.format("%16s", Integer.toBinaryString(Main.EXE_M.AluResult)).replace(" ", "0")
+				: Integer.toBinaryString(Main.EXE_M.AluResult).substring(16)));
+		System.out.println("memory word read: " + Instruction_Decode.exshort(Main.M_WB.ReadData));
 		System.out.println("rt/rd register: " + Integer.toBinaryString(Main.EXE_M.WriteReg));
-		System.out.printf("WB controls: MemToReg: %d, RegWrite: %d\n", (Main.EXE_M.MemtoReg ? 1 : 0),
+		System.out.printf("WB controls: MemToReg: %d, RegWrite: %d\n\n", (Main.EXE_M.MemtoReg ? 1 : 0),
 				(Main.EXE_M.RegWrite ? 1 : 0));
 	}
 

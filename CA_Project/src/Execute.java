@@ -48,11 +48,11 @@ public class Execute {
 		System.out.println("Execute stage");
 		System.out.printf("zero flag : %d , less than flag : %d ", (Zflag ? 1 : 0), (LessThanflag ? 1 : 0));
 		System.out.println("branch address: " + Instruction_Decode.SignExtend(Integer.toBinaryString(branchAddress)));
-		System.out.println("ALU result/address: " + Instruction_Decode.SignExtend(Integer.toBinaryString(ALUResult)));
+		System.out.println("ALU result/address: " + (ALUResult>=0?String.format("%16s", Integer.toBinaryString(ALUResult)).replace(" ", "0"):Integer.toBinaryString(ALUResult).substring(16)));
 		System.out.println("rt/rd register: " + Integer.toBinaryString(Main.ID_EXE.writereg));
 		System.out.printf("WB controls: MemToReg: %d, RegWrite: %d\n", (Main.ID_EXE.MemtoReg ? 1 : 0),
 				(Main.ID_EXE.RegWrite ? 1 : 0));
-		System.out.printf("MEM controls: MemRead: %d, MemWrite: %d, BranchEq: %d, BranchLessThan: %d, jump: %d\n",
+		System.out.printf("MEM controls: MemRead: %d, MemWrite: %d, BranchEq: %d, BranchLessThan: %d, jump: %d\n\n",
 				(Main.ID_EXE.MemRead ? 1 : 0), (Main.ID_EXE.MemWrite ? 1 : 0), (Main.ID_EXE.Brancheq ? 1 : 0),
 				(Main.ID_EXE.Branchless ? 1 : 0), (Main.ID_EXE.Jump ? 1 : 0));
 	}

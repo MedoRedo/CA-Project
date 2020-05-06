@@ -34,7 +34,7 @@ public class decode_exec {
 		Pc = pc;
 		ReadData1 = readData1;
 		ReadData2 = readData2;
-		Immediate = Short.parseShort(immediate, 2);
+		Immediate = (short) Integer.parseUnsignedInt(immediate, 2);
 		this.writereg = writereg;
 		jumpDest = j ;
 	}

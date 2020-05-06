@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		init();
-		// loadProgram();
+		loadProgram();
 		run();
 	}
 
@@ -33,8 +33,8 @@ public class Main {
 	public static void loadProgram() {
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader("Program"));
-			for (int i = 0; i < 6; i++) {
-				instMemo.instructions[i] = reader.readLine();
+			while(reader.ready()) {
+				instMemo.instructions[numofins] = reader.readLine();
 				numofins++;
 			}
 			reader.close();
@@ -64,7 +64,7 @@ public class Main {
 		id.InstDecode();
 		Instruction_Fetch iFetch = new Instruction_Fetch(instMemo);
 		iFetch.InstFetch();
-		
+
 	}
 
 }

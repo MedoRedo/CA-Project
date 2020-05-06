@@ -20,8 +20,8 @@ public class Instruction_Fetch {
 
 	public void print() {
 		System.out.println("Fetch stage");
-		System.out.println("Next PC: " + String.format("%16s", Main.PC).replace(" ", "0"));
-		System.out.println("Instruction: " + Main.IF_ID.ins);
+		System.out.println("Next PC: " + String.format("%16s", Integer.toBinaryString(Main.PC)).replace(" ", "0"));
+		System.out.println("Instruction: " + Main.IF_ID.ins+"\n");
 	}
 
 	/*

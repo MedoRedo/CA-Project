@@ -31,7 +31,10 @@ public class Write_Back {
 
 	public void print() {
 		System.out.println("Write Back Stage");
-		System.out.println("Write data :" + reg_File.write_Data);
-		System.out.println("Write register :" + Main.M_WB.RegWrite);
+		System.out.println("Write data : " + (reg_File.write_Data >= 0
+				? String.format("%16s", Integer.toBinaryString(reg_File.write_Data)).replace(" ", "0")
+				: Integer.toBinaryString(reg_File.write_Data).substring(16)));
+	
+		System.out.println("Write register : " + (Main.M_WB.RegWrite ? 1 : 0) + "\n");
 	}
 }
