@@ -64,6 +64,7 @@ public class Main {
 		id.InstDecode();
 		Instruction_Fetch iFetch = new Instruction_Fetch(instMemo);
 		iFetch.InstFetch();
+		
 	}
 
 }
