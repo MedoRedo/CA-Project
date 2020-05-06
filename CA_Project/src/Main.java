@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Main {
 	static fetch_decode IF_ID;
@@ -26,7 +28,19 @@ public class Main {
 			nextCycle();
 		}
 	}
-
+	public static void loadProgram() {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("Program"));
+			for (int i = 0; i < 6; i++) {
+				instMemo.instructions[i] = reader.readLine();
+			}
+			reader.close();
+			ram.setMemWrite(0, (short) 15);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 	public void nextCycle() {
 		Write_Back wb = new Write_Back(regFile);
 		wb.WriteBack();
