@@ -1,6 +1,7 @@
 
 public class Memory_Access {
 	Cache cache;
+
 	public Memory_Access(Cache cache) {
 		this.cache = cache;
 	}
@@ -13,7 +14,7 @@ public class Memory_Access {
 	 * the corresponding flag for memory accessing
 	 */
 	public void MemoAccess() {
-		if(Main.EXE_M != null) {
+		if (Main.EXE_M != null) {
 			short ALUresult = Main.EXE_M.AluResult;
 			boolean MemWrite = Main.EXE_M.MemWrite;
 			boolean MemRead = Main.EXE_M.MemRead;
@@ -27,25 +28,39 @@ public class Memory_Access {
 			if (MemWrite) {
 				cache.write(ALUresult, writeData);
 			}
-			
+
 			if (BranchEq && Zero_Flag) {
 				Main.PC = branchAddress;
 			}
-			if (BranchLess && lessThan_Flag){
+			if (BranchLess && lessThan_Flag) {
 				Main.PC = branchAddress;
+			}
+			if(Main.EXE_M.Jump) {
+				Main.PC=Main.EXE_M.JumpDest;
 			}
 			short readData = 0;
 			if (MemRead) {
-				readData =  cache.read(ALUresult);
+				readData = cache.read(ALUresult);
 			}
-			Main.M_WB = new mem_wb(Main.EXE_M.MemtoReg, Main.EXE_M.RegWrite, ALUresult, readData);			
-		}else {
+			Main.M_WB = new mem_wb(Main.EXE_M.MemtoReg, Main.EXE_M.RegWrite, ALUresult, readData);
+			print();
+		} else {
 			Main.M_WB = null;
 		}
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	// ALU result: 0000 0000 0000 0000 0000 0000 0000 0000
+	// memory word read: 1111 1111 1111 1111 0000 0000 0000 0000
+	// rt/rd field: 01001
+	// WB controls: MemToReg: 0, RegWrite: 1
 
+	public void print() {
+		System.out.println("Memory stage");
+		System.out.println("ALU result: " + Main.EXE_M.AluResult);
+		System.out.println("memory word read: " + Main.M_WB.ReadData);
+		System.out.println("rt/rd register: " + Integer.toBinaryString(Main.EXE_M.WriteReg));
+		System.out.printf("WB controls: MemToReg: %d, RegWrite: %d\n", (Main.EXE_M.MemtoReg ? 1 : 0),
+				(Main.EXE_M.RegWrite ? 1 : 0));
 	}
+
 }

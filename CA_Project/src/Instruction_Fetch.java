@@ -6,19 +6,22 @@ public class Instruction_Fetch {
 		this.instMemo = instMemo;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void InstFetch() {
 		if (Main.PC < Main.numofins) {
 			StringBuilder sb = new StringBuilder(instMemo.instructions[Main.PC]);
-			Main.IF_ID.ins = sb.toString();
-			Main.IF_ID.pc = ++Main.PC;
+			Main.IF_ID=new fetch_decode(++Main.PC,sb.toString());
+//			Main.IF_ID.ins = sb.toString();
+//			Main.IF_ID.pc = ++Main.PC;
+			print();
 		} else {
 			Main.IF_ID = null;
 		}
+	}
+
+	public void print() {
+		System.out.println("Fetch stage");
+		System.out.println("Next PC: " + String.format("%16s", Main.PC).replace(" ", "0"));
+		System.out.println("Instruction: " + Main.IF_ID.ins);
 	}
 
 	/*

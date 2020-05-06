@@ -14,6 +14,7 @@ public class exec_mem {
 	short AluResult;
 	short WriteData;
 	short WriteReg;
+	short JumpDest;
 
 	public exec_mem(decode_exec ID_EXE, Short ALUResult, Short branchAddress, boolean lessThanFlag, boolean Zflag) {
 		this.Brancheq = ID_EXE.Brancheq;
@@ -28,5 +29,6 @@ public class exec_mem {
 		this.BranchAddress = branchAddress;
 		this.LessThanFlag = lessThanFlag;
 		this.Zflag = Zflag;
+		this.JumpDest = ID_EXE.jumpDest;
 	}
 }

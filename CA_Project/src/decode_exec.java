@@ -20,7 +20,7 @@ public class decode_exec {
 
 	public decode_exec(boolean regDst, boolean brancheq,boolean branchless, boolean jump, boolean memRead, boolean memWrite,
 			boolean memtoReg, String aluOp, boolean aluSrc, boolean regWrite, short pc, short readData1,
-			short readData2, String immediate, short writereg, String j) {
+			short readData2, String immediate, short writereg, Short j) {
 		RegDst = regDst;
 		Brancheq = brancheq;
 		Branchless = branchless;
@@ -36,6 +36,6 @@ public class decode_exec {
 		ReadData2 = readData2;
 		Immediate = Short.parseShort(immediate, 2);
 		this.writereg = writereg;
-		jumpDest = Short.parseShort(immediate, 2);
+		jumpDest = j ;
 	}
 }

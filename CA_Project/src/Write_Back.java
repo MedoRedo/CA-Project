@@ -25,6 +25,13 @@ public class Write_Back {
 				reg_File.write_Data = Main.M_WB.ALUresult;
 			}
 			reg_File.setWrite(Main.M_WB.RegWrite);
+			print();
 		}
+	}
+
+	public void print() {
+		System.out.println("Write Back Stage");
+		System.out.println("Write data :" + reg_File.write_Data);
+		System.out.println("Write register :" + Main.M_WB.RegWrite);
 	}
 }

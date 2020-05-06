@@ -1,9 +1,10 @@
+import javax.xml.crypto.dsig.SignedInfo;
 
 public class Instruction_Decode {
-	String ALUop, SignExtendimm, SignExtendjump;
+	String ALUop, SignExtendimm;
 	boolean RegDst, ALUSrc, RegWrite, MemRead, MemWrite, Brancheq, Branchless, MemtoReg, jump;
 	Register_File regFile;
-	short ReadData1, ReadData2, WriteReg;
+	short ReadData1, ReadData2, WriteReg,JumpDest;
 
 	public Instruction_Decode(Register_File regFile) {
 		this.regFile = regFile;
@@ -13,10 +14,11 @@ public class Instruction_Decode {
 	 * This method takes in the instruction from InstFetch method as an input,
 	 * decodes and outputs the ALUOp code, the first operand, the second operand.
 	 */
+	
 	public void InstDecode() {
 		if (Main.IF_ID != null) {
 			String inst = Main.IF_ID.ins;
-			String OpCode = inst.substring(0, 3);
+			String OpCode = inst.substring(0, 4);
 			ContUnit(OpCode);
 			regFile.write = RegWrite;
 			regFile.decode(inst, RegDst);
@@ -24,9 +26,10 @@ public class Instruction_Decode {
 			ReadData2 = regFile.read_Data_2();
 			WriteReg = regFile.write_Register;
 			SignExtendimm = SignExtend(inst.substring(12));
-			SignExtendjump = SignExtend(inst.substring(4));
+			JumpDest=ReadData1;
 			Main.ID_EXE = new decode_exec(RegDst, Brancheq, Branchless, jump, MemRead, MemWrite, MemtoReg, ALUop,
-					ALUSrc, RegWrite, Main.IF_ID.pc, ReadData1, ReadData2, SignExtendimm, WriteReg, SignExtendjump);
+					ALUSrc, RegWrite, Main.IF_ID.pc, ReadData1, ReadData2, SignExtendimm, WriteReg, JumpDest);
+			print();
 		} else
 			Main.ID_EXE = null;
 	}
@@ -36,7 +39,7 @@ public class Instruction_Decode {
 	 * extended value in 16-bits as follows: the left most significant bit
 	 * dublicates
 	 */
-	public String SignExtend(String immediate) {
+	public static String SignExtend(String immediate) {
 		return String.format("%16s", immediate).replace(" ", immediate.substring(0, 1));
 	}
 
@@ -218,5 +221,21 @@ public class Instruction_Decode {
 			break;
 
 		}
+	}
+
+	public void print() {
+		System.out.println("Decode stage");
+		System.out.println("read data 1: " + SignExtend(Integer.toBinaryString(ReadData1)));
+		System.out.println("read data 2: " + (jump ? "don't care" : SignExtend(Integer.toBinaryString(ReadData2))));
+		System.out.println("sign-extend: " + SignExtendimm);
+		System.out.println("rt: " + (jump ? "don't care" : Main.IF_ID.ins.substring(8, 12)));
+		System.out.println("rd: " + (!ALUSrc ? "don't care" : Main.IF_ID.ins.substring(12)));
+		System.out.println("Next PC: " + String.format("%16s", Main.IF_ID.pc).replace(" ", "0"));
+		System.out.printf("WB controls: MemToReg: %d, RegWrite: %d\n", (MemtoReg ? 1 : 0), (RegWrite ? 1 : 0));
+		System.out.printf("MEM controls: MemRead: %d, MemWrite: %d, BranchEq: %d, BranchLessThan: %d, jump: %d\n",
+				(MemRead ? 1 : 0), (MemWrite ? 1 : 0), (Brancheq ? 1 : 0), (Branchless ? 1 : 0), (jump ? 1 : 0));
+		System.out.printf("EX controls: RegDest: %d, ALUOp: %s, ALUSrc: %d\n", (RegDst ? 1 : 0), ALUop,
+				(ALUSrc ? 1 : 0));
+
 	}
 }
